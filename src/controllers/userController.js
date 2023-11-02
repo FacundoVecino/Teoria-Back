@@ -1,6 +1,13 @@
-export const getUsers = (req, res) => {
-    console.log("Llegaste a la ruta de usuarios")
-    res.status(201).json({
-        message: "Se han recibido los datos correctamente"
+import UserCollection from '../models/userSchema.js';
+
+export const getUsers = async (_, res) => {
+  try {
+    const data = await UserCollection.find({});
+    res.json(data);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({
+      message: 'Ocurrió un error',
     });
-}
+  }
+};

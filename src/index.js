@@ -1,8 +1,11 @@
-import express from "express";
-import morgan from "morgan";
-import cors from "cors";
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
 
-import userRouter from "./routes/userRoutes.js"
+import userRouter from './routes/userRoutes.js';
+
+// Conexion con la base de datos
+import './database/database.js';
 
 // 1. Iniciar la aplicacion
 const app = express();
@@ -11,20 +14,20 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // 3. Middlewares
-app.use(morgan("dev")); // Genera console.log que brindan informacion cada vez que se conectan al servidor
+app.use(morgan('dev')); // Genera console.log que brindan informacion cada vez que se conectan al servidor
 
-//CROSS-ORIGIN-RESOURCE-SHARING
-app.use(cors()) // (Modo puta) 
+// CROSS-ORIGIN-RESOURCE-SHARING
+app.use(cors()); // (Modo puta)
 /* app.use(cors({
     origin: "https://rollingcode.com"   Sirve para especificar la conexion entre distintas url
 })) */
 
-app.use(express.json()) // Le dice a la aplicacion que se prepare para recibir en formato json
+app.use(express.json()); // Le dice a la aplicacion que se prepare para recibir en formato json
 
 // 4. Rutas
-app.use(userRouter)
+app.use(userRouter);
 
 // 5. Iniciar el loop del servidor
 app.listen(PORT, () => {
-    console.log(`Servidor ejecutandose en el puerto ${PORT}`)
+  console.log(`Servidor ejecutandose en el puerto ${PORT}`);
 });
