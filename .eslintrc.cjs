@@ -11,6 +11,8 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-underscore-dangle': 'off',
     'no-unused-vars': 2,
+    'object-curly-newline': 'off',
+    'import/no-extraneous-dependencies': 'off',
   },
   ignorePatterns: ['**/node_modules/**', '**/dist/**'],
 };
