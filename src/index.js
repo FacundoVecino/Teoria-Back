@@ -2,6 +2,8 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 
+import userRouter from "./routes/userRoutes.js"
+
 // 1. Iniciar la aplicacion
 const app = express();
 
@@ -20,6 +22,7 @@ app.use(cors()) // (Modo puta)
 app.use(express.json()) // Le dice a la aplicacion que se prepare para recibir en formato json
 
 // 4. Rutas
+app.use(userRouter)
 
 // 5. Iniciar el loop del servidor
 app.listen(PORT, () => {
