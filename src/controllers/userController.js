@@ -4,10 +4,12 @@ import UserModel from '../models/userSchema.js';
 export const getUsers = async (_, res) => {
   try {
     const data = await UserModel.find({});
-    const filterData = data.filter((user) => user._doc.isActive === true).map((user) => ({
-      ...user._doc,
-      password: undefined,
-    }));
+    const filterData = data
+      .filter((user) => user._doc.isActive === true)
+      .map((user) => ({
+        ...user._doc,
+        password: undefined,
+      }));
     res.json({ data: filterData, message: 'Usuarios encontrados' });
   } catch (e) {
     res.status(500).json({
@@ -52,7 +54,10 @@ export const postUser = async (req, res) => {
 };
 
 export const putUser = async (req, res) => {
-  const { body, params: { id } } = req;
+  const {
+    body,
+    params: { id },
+  } = req;
 
   try {
     // updateOnde Metodo actualiza un elemento
@@ -89,13 +94,15 @@ export const putUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const { params: { id } } = req;
+  const {
+    params: { id },
+  } = req;
 
   try {
     // updateOnde Metodo actualiza un elemento
     // Necesita por parametros el id para buscar el usuario que coincida
     // Y el body para indicar que actualice lo que recibe por ahi
-    const action = await UserModel.updateOne({ _id: id }, { isActive: false });
+    const action = await UserModel.updateOne({ _id: id, isActive: true }, { isActive: false });
 
     // matchedCount es un campo que verifica cuantos elementos fueron modificados
     if (action.matchedCount === 0) {

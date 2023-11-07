@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 import userRouter from './routes/userRoutes.js';
+import authRouter from './routes/authRoutes.js';
 
 // Conexion con la base de datos
 import './database/database.js';
@@ -25,7 +26,8 @@ app.use(cors()); // (Modo puta)
 app.use(express.json()); // Le dice a la aplicacion que se prepare para recibir en formato json
 
 // 4. Rutas
-app.use(userRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/auth', authRouter);
 
 // 5. Iniciar el loop del servidor
 app.listen(PORT, () => {
